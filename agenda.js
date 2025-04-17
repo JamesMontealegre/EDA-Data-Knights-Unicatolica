@@ -1,5 +1,6 @@
 class doubleLinkedListNode {
-  constructor(nombre, apellido) {
+  constructor(nombre, apellido, telefono) {
+    this.telefono = telefono;
     this.nombre = nombre;
     this.apellido = apellido;
     this.next = null;
