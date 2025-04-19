@@ -153,7 +153,7 @@ $("#searchBtn").click(() => {
 $('#deleteBtn').click(() => {
     const l = prompt("Letra para eliminar:")?.trim().toUpperCase();
     if (!l) return;
-    if (!confirm('Eliminar contactos que empiecen con "${l}"?')) return;
+    if (!confirm(`Eliminar contactos que empiecen con "${l}"?`)) return;
     agenda.deleteByFirstLetter(l);
     saveToLocalStorage();
     renderTable(toArray());
