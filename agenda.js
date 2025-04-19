@@ -40,7 +40,7 @@ class doubleLinkedList {
     } else {
         let currentNode = this.head;
 
-        while (currentNode !== null && currentNode.nombre[0] < newNode.apellido[0]) {
+        while (currentNode !== null && currentNode.firstName[0] < newNode.lastName[0]) {
             currentNode = currentNode.next;
         }
 
