@@ -115,3 +115,46 @@ function toArray() {
   while (current) arr.push(current), (current = current.next);
   return arr;
 }
+function renderTable(data) {
+  $("#tableBody").html(
+    data
+      .map(
+        (c) => `
+      <tr>
+        <td class="py-2 px-4 border-b">${c.telefono}</td>
+        <td class="py-2 px-4 border-b">${c.firstName}</td>
+        <td class="py-2 px-4 border-b">${c.lastName}</td>
+      </tr>
+    `
+      )
+      .join("")
+  );
+}
+
+$("#addBtn").click(() => {
+  const telefono = $("#indexInput").val().trim();
+  const first = $("#valueInput").val().trim();
+  const last = $("#apellidoInput").val().trim();
+
+  if (!telefono || !first || !last) return alert("Completa todos los campos.");
+
+  agenda.insertByFirstLetter(new doubleLinkedListNode(first, last, telefono));
+  saveToLocalStorage();
+  renderTable(toArray());
+  $("#indexInput, #valueInput, #apellidoInput").val("");
+});
+
+$("#searchBtn").click(() => {
+  const l = prompt("Letra para buscar:")?.trim().toUpperCase();
+  if (!l) return;
+  renderTable(agenda.searchByFirstLetter(l));
+});
+
+$('#deleteBtn').click(() => {
+    const l = prompt("Letra para eliminar:")?.trim().toUpperCase();
+    if (!l) return;
+    if (!confirm(Eliminar contactos que empiecen con "${l}"?)) return;
+    agenda.deleteByFirstLetter(l);
+    saveToLocalStorage();
+    renderTable(toArray());
+  });
